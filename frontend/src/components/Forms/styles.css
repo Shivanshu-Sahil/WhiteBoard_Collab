@@ -1,0 +1,81 @@
+
+/*
+ * Minimal, clean styles for Forms component
+ * Orange color scheme, hover effect, responsive
+ */
+
+.forms-card {
+  height: 340px;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+  border: 2.5px solid #ff9800;
+  border-radius: 1.1rem;
+  background: linear-gradient(135deg, #fff7e6 0%, #fff 100%);
+  box-shadow: 0 6px 24px rgba(255, 152, 0, 0.10);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.forms-card:hover {
+  box-shadow: 0 8px 32px rgba(255, 152, 0, 0.18);
+  border-color: #fb8c00;
+}
+
+.forms-card .card-title {
+  color: #3e00dc;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.5px;
+}
+
+.forms-card input[type="text"] {
+  border: 1.5px solid #ffb74d;
+  border-radius: 0.5rem;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  background: #fffdfa;
+  transition: border-color 0.2s;
+}
+.forms-card input[type="text"]:focus {
+  border-color: #fb8c00;
+  outline: none;
+}
+
+.forms-card .btn-primary {
+  background: linear-gradient(90deg, #ff9800 0%, #fb8c00 100%);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.05rem;
+  border-radius: 0.5rem;
+  padding: 0.7rem 0;
+  margin-top: 0.5rem;
+  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.10);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.forms-card .btn-primary:hover {
+  background: linear-gradient(90deg, #fb8c00 0%, #ff9800 100%);
+}
+
+.forms-card .form-label {
+  color: #fb8c00;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+@media (max-width: 767.98px) {
+  .forms-card {
+    height: auto;
+    min-height: 160px;
+    padding: 1.2rem 0.7rem;
+  }
+  .forms-card .card-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.7rem;
+  }
+}
