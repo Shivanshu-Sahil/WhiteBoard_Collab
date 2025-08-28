@@ -1,4 +1,3 @@
-import "./styles.css";
 import { useState, useRef } from "react";
 import WhiteBoard from "../../components/Whiteboard";
 

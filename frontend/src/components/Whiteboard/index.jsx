@@ -23,7 +23,6 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import rough from 'roughjs/bundled/rough.esm.js';
-import './styles.css';
 
 const generator = rough.generator();
 /**
