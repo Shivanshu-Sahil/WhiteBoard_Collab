@@ -1,213 +1,161 @@
+# 🎨 Collaborative Whiteboard App
 
-# Collaborative Whiteboard App
+<div align="center">
 
-## Overview
+A full-stack, real-time collaborative whiteboard application built with the MERN stack and Socket.IO.
+Enables multiple users to join rooms, draw together on a shared canvas, and see changes instantly with role-based access control.
 
-This project is a full-stack, real-time collaborative whiteboard application built with the MERN stack (MongoDB, Express, React, Node.js) and Socket.IO. It enables multiple users to join a room, draw together on a shared canvas, and see each other's changes instantly. The app features role-based access (host/presenter vs. participant), modern UI/UX, and robust real-time synchronization.
+![Whiteboard Screenshot](https://i.postimg.cc/k4dtXrGX/Vite-React-Google-Chrome-28-08-2025-7-08-15-pm.png)
+
+<img alt="React" src="https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react">
+<img alt="Node.js" src="https://img.shields.io/badge/Node.js-20-339933?style=for-the-badge&logo=node.js">
+<img alt="Socket.IO" src="https://img.shields.io/badge/Socket.IO-4-010101?style=for-the-badge&logo=socket.io">
+<img alt="Express" src="https://img.shields.io/badge/Express-4-000000?style=for-the-badge&logo=express">
+<img alt="Vite" src="https://img.shields.io/badge/Vite-5-646CFF?style=for-the-badge&logo=vite">
+
+</div>
+
+# ✨ Features 
+
+🎨 **Real-Time Collaborative Drawing**: Multiple users can draw simultaneously with pencil, line, and rectangle tools
+
+🎭 **Role-Based Access Control**: Host/presenter has full control while participants enjoy view-only experience
+
+🛠️ **Rich Drawing Tools**: Complete toolset with color picker, brush selection, and shape tools
+
+⏮️ **Smart Canvas Controls**: Undo/Redo functionality and one-click canvas clearing for seamless editing
+
+👥 **Live User Management**: Real-time user list with animated sidebar and instant join/leave notifications
+
+📱 **Responsive Design**: Flawless experience across desktop, tablet, and mobile devices
+
+🏠 **Room-Based Collaboration**: Create or join rooms with unique IDs for organized team sessions
+
+🔔 **Smart Notifications**: Toast alerts for user activities, perfectly styled to match app theme
+
+⚡ **Lightning Fast**: Built with Vite for blazing-fast development and optimized production builds
+
+## 🛠️ Tech Stack
+
+**Frontend**
+- **Framework**: React 18 with Vite  
+- **Language**: JavaScript ES6+
+- **Styling**: Bootstrap + Custom CSS  
+- **Canvas Library**: Rough.js for natural drawing
+- **Real-time**: Socket.IO Client
+- **Notifications**: React Toastify
+- **Build Tool**: Vite
+
+**Backend**  
+- **Runtime**: Node.js
+- **Framework**: Express.js
+- **Real-time**: Socket.IO Server
+- **Session Management**: In-memory (MongoDB planned)
+- **Architecture**: Modular utilities design
+
+**Development & Quality**
+- **Linting**: ESLint + Prettier
+- **Code Quality**: Consistent formatting and best practices
+- **Development**: Hot reload with Vite
+
+# Getting Started
+
+## 📋 Prerequisites
+
+- **Node.js** (v16 or higher) – [Download here](https://nodejs.org/)
+- **npm** or **yarn** – Comes with Node.js
+- **Modern browser** – Chrome, Firefox, Safari, or Edge
+- **Team spirit** – Essential for the best collaborative experience!
 
 ---
 
-## Table of Contents
-- [Features](#features)
-- [Architecture](#architecture)
-- [Tech Stack](#tech-stack)
-- [Folder Structure](#folder-structure)
-- [Setup & Installation](#setup--installation)
-- [Usage](#usage)
-- [Key Components](#key-components)
-- [Real-Time Collaboration](#real-time-collaboration)
-- [Role-Based Access](#role-based-access)
-- [UI/UX & Accessibility](#uiux--accessibility)
-- [Testing](#testing)
-- [Security & Best Practices](#security--best-practices)
-- [Known Issues & TODOs](#known-issues--todos)
-- [License](#license)
+## 🚀 Installation & Setup
 
----
+1. **Clone the repository**
 
-## Features
-- **Real-time collaborative drawing** (pencil, line, rectangle)
-- **Undo/Redo** and **Clear Canvas**
-- **Color picker** and tool selection
-- **Role-based access:** Only the host/presenter can draw and control the whiteboard
-- **User list sidebar** with live user count and animated toggle
-- **Responsive, modern UI** with Bootstrap and custom CSS
-- **Toast notifications** for user join/leave events, styled to match the app theme
-- **Room creation/joining** with unique IDs
-- **Socket.IO-powered instant updates**
-- **WCAG-compliant accessibility**
-
----
-
-## Architecture
-
-**Frontend:**
-- Built with React (Vite for fast dev/build)
-- Uses functional components and hooks
-- State management is local (per component) with props for integration
-- Socket.IO client for real-time events
-- Bootstrap and custom CSS for styling
-
-**Backend:**
-- Node.js with Express server
-- Socket.IO server for real-time communication
-- In-memory user/session management (no DB persistence in current version)
-- Modular user management utilities
-
-**Data Flow:**
-- Users join a room (host or participant)
-- Presenter’s drawing actions are sent as JSON (not images) to the server
-- Server broadcasts drawing actions to all participants in the room
-- User join/leave events update the user list and trigger toast notifications
-
----
-
-## Tech Stack
-
-- **Frontend:** React, Vite, Bootstrap, roughjs, react-toastify, socket.io-client
-- **Backend:** Node.js, Express, Socket.IO
-- **Other:** ESLint, Prettier, custom CSS
-
----
-
-## Folder Structure
-
-```
-frontend/
-	src/
-		components/
-			Forms/
-			Whiteboard/
-			UserBar/
-		pages/
-			Home/
-			RoomPage/
-		assets/
-		App.jsx
-		main.jsx
-		...
-	public/
-	package.json
-	vite.config.js
-	...
-backend/
-	server.js
-	utils/
-		users.js
-	package.json
-	...
+```bash
+git clone https://github.com/yourusername/collaborative-whiteboard.git
+cd collaborative-whiteboard
 ```
 
----
+2. **Install backend dependencies**
 
-## Setup & Installation
+```bash
+cd backend
+npm install
+```
 
-1. **Clone the repository:**
-	 ```sh
-	 git clone <repo-url>
-	 cd Whiteboard
-	 ```
-2. **Install dependencies:**
-	 - Frontend:
-		 ```sh
-		 cd frontend
-		 npm install
-		 ```
-	 - Backend:
-		 ```sh
-		 cd ../backend
-		 npm install
-		 ```
-3. **Start the servers:**
-	 - Backend:
-		 ```sh
-		 npm run dev
-		 ```
-	 - Frontend:
-		 ```sh
-		 cd ../frontend
-		 npm run dev
-		 ```
-4. **Open the app:**
-	 - Visit [http://localhost:5173](http://localhost:5173) in your browser
+3. **Install frontend dependencies**
 
----
+```bash
+cd ../frontend  
+npm install
+```
 
-## Usage
+4. **Start the backend server**
 
-1. **Create or join a room** from the landing page
-2. **Share the room ID** with others to collaborate
-3. **Host/presenter** can draw, undo/redo, clear, and control the whiteboard
-4. **Participants** see a live view and user list, but cannot draw
-5. **User list** can be toggled from the floating button
-6. **Toast notifications** appear for user join/leave events
+```bash
+cd backend
+npm run dev
+```
+*Backend server will run on `http://localhost:3000`*
 
----
+5. **Launch the frontend application**
 
-## Key Components
+```bash
+cd ../frontend
+npm run dev
+```
+*Frontend will open at `http://localhost:5173`*
 
-- **Forms:** Room creation/joining UI
-- **Whiteboard:** Canvas drawing, tool/color selection, undo/redo, real-time sync
-- **RoomPage:** Main collaboration page, user list, controls, and integration
-- **UserBar:** Sidebar for user list (animated, styled)
+6. **Start collaborating!** 
+   - Open your browser and navigate to `http://localhost:5173`
+   - Create a room or join an existing one
+   - Share the room ID with your team and start drawing together!
 
----
+## 🚀 Deployment
 
-## Real-Time Collaboration
+### Local Development
+```bash
+# Backend
+cd backend && npm run dev
 
-- Uses Socket.IO for low-latency, bi-directional communication
-- Presenter emits drawing actions as JSON; server broadcasts to all room members
-- User join/leave events update all clients instantly
+# Frontend  
+cd frontend && npm run dev
+```
 
----
+### Production Build
+```bash
+# Frontend build
+cd frontend && npm run build
 
-## Role-Based Access
+# Backend production
+cd backend && npm start
+```
 
-- **Host/Presenter:** Can draw, undo/redo, clear, and control the whiteboard
-- **Participants:** View-only; see live updates and user list
-- Role is set at room creation/join and enforced in UI and logic
+## 🙌 Contributing
 
----
+Contributions are most welcome! Please feel free to submit pull requests or open issues for bugs and feature requests.
 
-## UI/UX & Accessibility
 
-- Modern, minimal, and responsive design
-- Bootstrap grid and custom CSS for layout
-- Accessible color contrast and keyboard navigation
-- Toast notifications styled to match app theme
-- Animated sidebar and buttons for user list
+## 📬 Contact & Support
+
+- **LinkedIn**: [Profile](https://www.linkedin.com/in/shivanshu-sahil/)
+- **Email**: sahil060659@gmail.com
+- **GitHub**: You're already here!!
+
+## 📝 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for complete details.
 
 ---
 
-## Testing
+<div align="center">
 
-- Manual testing for all features and edge cases
-- Linting with ESLint and Prettier
-- TODO: Add automated unit and integration tests
+**Made with 🎨 for seamless collaboration and real-time creativity**
 
----
+*Built with passion for modern web development, intuitive user experiences, and the power of real-time collaboration*
 
-## Security & Best Practices
+⭐ **Star this repo if you found it helpful!** ⭐
 
-- Input validation on forms
-- No sensitive data stored client-side
-- Socket events validated on server
-- No hardcoded secrets in repo
-- TODO: Add authentication and persistent storage
-
----
-
-## Known Issues & TODOs
-
-- No persistent storage (users and whiteboard state are in-memory)
-- No authentication (anyone with room ID can join)
-- No mobile drawing support (touch events)
-- Add more drawing tools (ellipse, text, etc.)
-- Add export/download whiteboard as image
-- Add automated tests
-
----
-
-## License
-
-MIT License
+</div>
