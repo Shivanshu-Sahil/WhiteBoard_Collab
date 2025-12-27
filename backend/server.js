@@ -1,10 +1,10 @@
 const express=require("express");
 const app=express();
 
-const server=require("http").createServer(app);
-const {Server}=require("socket.io");
-const {userJoin}= require("./utils/users");
-const {addUser}= require("./utils/users");
+const server = require("http").createServer(app);
+const { Server } = require("socket.io");
+const { userJoin } = require("./utils/users");
+const { addUser, getUser } = require("./utils/users");
 
 const io=new Server(server);
 
@@ -24,7 +24,7 @@ io.on("connection",(socket)=>{
     socket.roomId = roomId;
     const users = addUser(data);
     // Send join confirmation to the user
-    socket.emit("userJoined",{success:true,users,message: `Welcome ${name}`});
+    socket.emit("userJoined", { success: true, users, message: `Welcome ${name}` });
     socket.broadcast.to(roomId).emit("userJoinedMsg", name);
     socket.broadcast.to(roomId).emit("usersList", users);
     // If there is whiteboard state for this room, send it to the new user
@@ -35,31 +35,42 @@ io.on("connection",(socket)=>{
     // socket.broadcast.to(roomId).emit("userJoined", { name, userId });
   });
 
-    // Presenter sends whiteboard data (JSON elements array)
+  // Presenter sends whiteboard data (JSON elements array)
     socket.on("whiteboardData",(data)=>{
-        // Find the room(s) this socket is in (excluding its own id room)
-        const rooms = Array.from(socket.rooms).filter(r => r !== socket.id);
-        rooms.forEach(roomId => {
-          whiteboardState[roomId] = data; // Save latest state for the room
-          // Broadcast to all others in the room
-          socket.broadcast.to(roomId).emit("whiteboardData", data);
-        });
-      });
-
-    socket.on("disconnect",()=>{
-        console.log("User disconnected");
-        // Remove user and update users list in the room
-        if (socket.userId && socket.roomId) {
-          const { removeUser, getUsersInRoom, getUser } = require("./utils/users");
-          const user = getUser(socket.userId);
-          removeUser(socket.userId);
-          const users = getUsersInRoom(socket.roomId);
-          socket.broadcast.to(socket.roomId).emit("userLeft", users);
-          if (user && user.name) {
-            socket.broadcast.to(socket.roomId).emit("userLeftMsg", user.name);
-          }
-        }
+    // Find the room(s) this socket is in (excluding its own id room)
+    const rooms = Array.from(socket.rooms).filter(r => r !== socket.id);
+    rooms.forEach(roomId => {
+      whiteboardState[roomId] = data; // Save latest state for the room
+      // Broadcast to all others in the room
+      socket.broadcast.to(roomId).emit("whiteboardData", data);
     });
+  });
+
+  // Handle chat messages
+  socket.on("message", (data) => {
+    const { message } = data;
+    const user = getUser(socket.userId);
+    if (user) {
+      socket.broadcast
+        .to(socket.roomId)
+        .emit("messageResponse", { message, name: user.name });
+    }
+  });
+
+  socket.on("disconnect", () => {
+    console.log("User disconnected");
+    // Remove user and update users list in the room
+    if (socket.userId && socket.roomId) {
+      const { removeUser, getUsersInRoom, getUser } = require("./utils/users");
+      const user = getUser(socket.userId);
+      removeUser(socket.userId);
+      const users = getUsersInRoom(socket.roomId);
+      socket.broadcast.to(socket.roomId).emit("userLeft", users);
+      if (user && user.name) {
+        socket.broadcast.to(socket.roomId).emit("userLeftMsg", user.name);
+      }
+    }
+  });
 
 });
 

@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import WhiteBoard from "../../components/Whiteboard";
+import Chat from "../../components/Chat";
 
 
 const RoomPage = ({ user, socket, users }) => {
@@ -8,6 +9,7 @@ const RoomPage = ({ user, socket, users }) => {
     const [elements, setElements] = useState([]);
     const [history, setHistory] = useState([]);
     const [openedUserTab, setOpenedUserTab] = useState(false);
+    const [openedChatTab, setOpenedChatTab] = useState(false);
     const canvasRef = useRef(null);
     const ctxRef = useRef(null);
 
@@ -54,8 +56,33 @@ const RoomPage = ({ user, socket, users }) => {
                 >
                     Users
                 </button>
+                <button
+                    type="button"
+                    className="btn btn-dark chat-button"
+                    style={{
+                        position: 'absolute',
+                        top: 65,
+                        right: 10,
+                        height: '48px',
+                        width: '90px',
+                        fontWeight: 600,
+                        fontSize: '1.1rem',
+                        borderRadius: '1.5rem',
+                        zIndex: 10,
+                        boxShadow: '0 4px 12px rgba(33,150,243,0.13)',
+                        transition: 'background 0.2s, box-shadow 0.2s, transform 0.2s',
+                    }}
+                    onClick={() => setOpenedChatTab((prev) => !prev)}
+                >
+                    Chat
+                </button>
                 <style>{`
                     .user-button:hover {
+                        background-color: #1c1c1c;
+                        box-shadow: 0 8px 24px rgba(33,150,243,0.18);
+                        transform: scale(1.06);
+                    }
+                    .chat-button:hover {
                         background-color: #1c1c1c;
                         box-shadow: 0 8px 24px rgba(33,150,243,0.18);
                         transform: scale(1.06);
@@ -130,6 +157,10 @@ const RoomPage = ({ user, socket, users }) => {
                             }
                         `}</style>
                     </div>
+                )}
+
+                {openedChatTab && (
+                    <Chat setOpenedChatTab={setOpenedChatTab} socket={socket} />
                 )}
 
             </div >
