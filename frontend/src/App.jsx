@@ -21,7 +21,7 @@ const socket = io(server, connectionOptions);
 
 
 
-const App=() => {
+const App = () => {
   const [userNo, setUserNo] = useState("");
   const [roomJoined, setRoomJoined] = useState(false);
   const [user, setUser] = useState({});
@@ -29,11 +29,11 @@ const App=() => {
 
   useEffect(() => {
     socket.on("userJoined", (data) => {
-      if(data.success){
+      if (data.success) {
         console.log(data.message);
         setUsers(data.users);
       }
-      else{
+      else {
         console.log("Error");
       }
     });
@@ -77,7 +77,7 @@ const App=() => {
     };
   }, []);
 
-   const uuid = () => {
+  const uuid = () => {
     let S4 = () => {
       return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
     };
@@ -98,8 +98,8 @@ const App=() => {
   };
 
 
-  return(
-    <div className="container">
+  return (
+    <div className="container-fluid px-0">
       <ToastContainer
         position="top-right"
         toastClassName="custom-toast"
@@ -113,7 +113,7 @@ const App=() => {
       />
       <Routes>
         <Route path="/" element={<Forms uuid={uuid} socket={socket} setUser={setUser} />} />
-  <Route path="/:roomId" element={<RoomPage user={user} users={users} socket={socket} />} />
+        <Route path="/:roomId" element={<RoomPage user={user} users={users} socket={socket} />} />
       </Routes>
     </div>
   );

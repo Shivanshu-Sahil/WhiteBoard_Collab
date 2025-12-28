@@ -30,7 +30,7 @@ const Chat = ({ setOpenedChatTab, socket }) => {
         <div
             className="chat-sidebar position-fixed top-0 end-0 bg-dark text-white shadow-lg"
             style={{
-                width: 300,
+                width: 270,
                 height: '100vh',
                 borderTopLeftRadius: '1.2rem',
                 borderBottomLeftRadius: '1.2rem',

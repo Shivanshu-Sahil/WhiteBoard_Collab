@@ -47,7 +47,7 @@ const CreateRoom = ({ uuid, socket, setUser }) => {
           id="roomCode"
           value={roomId}
           readOnly
-          style={{ background: '#f5f5f5', fontWeight: 500 }}
+          style={{ background: '#000000ff', fontWeight: 500 }}
         />
         <button
           className="btn btn-link p-0"
