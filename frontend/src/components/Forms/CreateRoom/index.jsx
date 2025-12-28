@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import{useNavigate} from 'react-router-dom'
+import { toast } from "react-toastify";
 
 
 const CreateRoom = ({ uuid, socket, setUser }) => {
@@ -8,6 +9,29 @@ const CreateRoom = ({ uuid, socket, setUser }) => {
     const [name, setName] = useState("");
 
     const navigate = useNavigate();
+
+    /**
+     * Copies the current room ID to the user's clipboard.
+     *
+     * Uses the modern Clipboard API when available and falls back to
+     * `document.execCommand('copy')` for older browsers.
+     *
+     * @returns {Promise<void>} Resolves when the copy attempt completes.
+     */
+    const handleCopy = async () => {
+      try {
+        await navigator.clipboard.writeText(roomId);
+        toast.success("Room ID copied!");
+      } catch (err) {
+        // Fallback for older browsers
+        const input = document.createElement("input");
+        input.value = roomId;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        document.body.removeChild(input);
+      }
+    };
 
     const handleCreateRoom = (e) => {
       e.preventDefault();
@@ -62,6 +86,7 @@ const CreateRoom = ({ uuid, socket, setUser }) => {
           className="btn btn-link p-0"
           style={{ color: '#1976d2', fontWeight: 600, textDecoration: 'none' }}
           tabIndex={0}
+          onClick={handleCopy}
           type="button"
         >
           Copy
